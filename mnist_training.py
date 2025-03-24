@@ -49,9 +49,11 @@ class SimpleFCNN(nn.Module):
     def __init__(self):
         super(SimpleFCNN, self).__init__()
         self.flatten = nn.Flatten()
-        self.fc1 = nn.Linear(32 * 32 * 3, 512)
-        self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, 10)
+        self.fc1 = nn.Linear(32 * 32 * 3, 2048)
+        self.fc2 = nn.Linear(2048, 1024)
+        self.fc3 = nn.Linear(1024, 512)
+        self.fc4 = nn.Linear(512, 256)
+        self.fc5 = nn.Linear(256, 10)
         self.dropout = nn.Dropout(0.2)
 
     def forward(self, x):
@@ -60,7 +62,11 @@ class SimpleFCNN(nn.Module):
         x = self.dropout(x)
         x = F.relu(self.fc2(x))
         x = self.dropout(x)
-        x = self.fc3(x)
+        x = F.relu(self.fc3(x))
+        x = self.dropout(x)
+        x = F.relu(self.fc4(x))
+        x = self.dropout(x)
+        x = self.fc5(x)
         return x
 
 model_type = "fcnn"  # "cnn" or "fcnn"
