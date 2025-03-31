@@ -13,6 +13,12 @@ epochs = 5
 learning_rate = 0.001
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+transform_train = transforms.Compose([
+    transforms.RandomCrop(32, padding=4),
+    transforms.RandomHorizontalFlip(),
+    transforms.ToTensor(),
+    transforms.Normalize((.4914, .4822, .4464), (.2023, .1994, .2010))
+])
 
 transform = transforms.Compose([
     transforms.ToTensor(),
@@ -28,6 +34,7 @@ train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 
+"""
 class SimpleCNN(nn.Module):
     def __init__(self):
         super(SimpleCNN, self).__init__()
@@ -44,6 +51,8 @@ class SimpleCNN(nn.Module):
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return x
+"""
+
 
 class SimpleFCNN(nn.Module):
     def __init__(self):
@@ -70,7 +79,7 @@ class SimpleFCNN(nn.Module):
         return x
 
 model_type = "fcnn"  # "cnn" or "fcnn"
-model = SimpleCNN().to(device) if model_type == "cnn" else SimpleFCNN().to(device)
+model = SimpleFCNN().to(device) if model_type == "cnn" else SimpleFCNN().to(device)
 
 
 criterion = nn.CrossEntropyLoss()
