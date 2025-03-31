@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
+from torch.optim.lr_scheduler import StepLR
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from PIL import Image
@@ -81,10 +82,9 @@ class SimpleFCNN(nn.Module):
 model_type = "fcnn"  # "cnn" or "fcnn"
 model = SimpleFCNN().to(device) if model_type == "cnn" else SimpleFCNN().to(device)
 
-
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-
+optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-4) # optimizer
+scheduler = StepLR(optimizer, step_size=5, gamma=0.1)
 
 def train_model(model, train_loader, optimizer, criterion):
     model.train()
