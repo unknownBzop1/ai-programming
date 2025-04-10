@@ -1,3 +1,6 @@
+import datetime
+from typing import TextIO
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -117,7 +120,12 @@ def evaluate_model(model, test_loader):
     return 100 * correct / total
 
 
-def main():
+def verbosely_write(file: TextIO, text: str):
+    file.writelines(text)
+    print(text)
+
+
+def main(file: TextIO):
     parser = argparse.ArgumentParser(description='Train a CNN on CIFAR-10')
     parser.add_argument("--model_type", type=str, default="cnn", help="Model type")
     parser.add_argument("--batch_size", type=int, default=64)
@@ -126,7 +134,7 @@ def main():
 
     args = parser.parse_args()
     batch_size, epochs, learning_rate, model_type = args.batch_size, args.epochs, args.lr, args.model_type
-    print(f'Model: {model_type}, Batch_size: {batch_size}, Epochs: {epochs}, Learning Rate: {learning_rate}')
+    verbosely_write(file, f'Model: {model_type}, Batch_size: {batch_size}, Epochs: {epochs}, Learning Rate: {learning_rate}')
 
     transform_train = transforms.Compose([
         transforms.RandomCrop(32, padding=4),
@@ -146,7 +154,7 @@ def main():
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
     model = build_model(model_type, 10).to(device)
-    print(f'Current device is {device}.')
+    verbosely_write(file, f'Current device is {device}.')
 
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-4)  # optimizer
@@ -156,8 +164,11 @@ def main():
         train_loss = train_model(model, train_loader, optimizer, criterion)
         scheduler.step()
         accuracy = evaluate_model(model, test_loader)
-        print(f"Epoch [{epoch}/{epochs}], Loss: {train_loss:.4f}, Accuracy: {accuracy:.2f}%")
+        verbosely_write(file, f'Epoch [{epoch}/{epochs}], Loss: {train_loss:.4f}, Accuracy: {accuracy:.2f}%')
 
 
 if __name__ == '__main__':
-    main()
+    now = datetime.datetime.now()
+    log_file = open(f'./log/{now.strftime("%y%m%d-%H%M%S")}.log', 'w', encoding='utf-8')
+    main(log_file)
+    log_file.close()
