@@ -2,15 +2,11 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
-from torch.optim.lr_scheduler import StepLR
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
-from PIL import Image
-import numpy as np
 from torch.optim.lr_scheduler import StepLR
 import argparse
 
-from torchvision.models import resnet, googlenet
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
@@ -125,16 +121,16 @@ def main():
         transforms.RandomCrop(32, padding=4),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
-        transforms.Normalize((.5071, .4867, .4408), (.2675, .2565, .2761))
+        transforms.Normalize((.4914, .4822, .4464), (.2023, .1994, .2010))
     ])
 
     transform_test = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((.5071, .4867, .4408), (.2675, .2565, .2761))
+        transforms.Normalize((.4914, .4822, .4464), (.2023, .1994, .2010))
     ])
 
-    train_dataset = datasets.CIFAR100(root='./data', train=True, download=True, transform=transform_train)
-    test_dataset = datasets.CIFAR100(root='./data', train=False, download=True, transform=transform_test)
+    train_dataset = datasets.CIFAR10(root='./data', train=True, download=True, transform=transform_train)
+    test_dataset = datasets.CIFAR10(root='./data', train=False, download=True, transform=transform_test)
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
@@ -154,6 +150,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-# 250410-2231
