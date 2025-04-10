@@ -58,24 +58,37 @@ class SimpleFCNN(nn.Module):
         return x
 
 
+def build_cnn_model(class_count: int) -> nn.Module:
+    return SimpleCNN(class_count)
+
+
+def build_fcnn_model(class_count: int) -> nn.Module:
+    return SimpleFCNN(class_count)
+
+
+def build_resnet18_model(class_count: int) -> nn.Module:
+    from torchvision.models import resnet18
+    model = resnet18(pretrained=False)  # if true, fetches pretrained data from imageNet
+    model.fc = nn.Linear(model.fc.in_features, class_count)
+    return model
+
+
+def build_googlenet_model(class_count: int) -> nn.Module:
+    from torchvision.models import googlenet
+    model = googlenet(pretrained=False)
+    model.fc = nn.Linear(model.fc.in_features, class_count)
+    return model
+
+
 def build_model(model_type: str, class_count=10) -> nn.Module:
-    match model_type:
-        case 'cnn':
-            return SimpleCNN(class_count)
-        case 'fcnn':
-            return SimpleFCNN(class_count)
-        case 'resnet18':
-            from torchvision.models import resnet18
-            model = resnet18(pretrained=False)  # if true, fetches pretrained data from imageNet
-            model.fc = nn.Linear(model.fc.in_features, class_count)
-            return model
-        case 'googlenet':
-            from torchvision.models import googlenet
-            model = googlenet(pretrained=False)
-            model.fc = nn.Linear(model.fc.in_features, class_count)
-            return model
-        case _:
-            raise ValueError(f'Unknown model type: {model_type}')
+    models_dict: dict = {
+        'cnn': build_cnn_model,
+        'fcnn': build_fcnn_model,
+        'resnet18': build_resnet18_model,
+        'googlenet': build_googlenet_model}
+    if model_type not in models_dict:
+        raise ValueError(f'Unknown model type: {model_type}')
+    return models_dict[model_type](class_count)
 
 
 def train_model(model, train_loader, optimizer, criterion):
