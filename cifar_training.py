@@ -155,13 +155,11 @@ def main(file: TextIO):
     parser.add_argument("--batch_size", type=int, default=64)
     parser.add_argument("--epochs", type=int, default=20, help='epoch count')
     parser.add_argument("--lr", type=float, default=.001, help='learning rate')
-    parser.add_argument("--log_path", type=str, default="./log", help="path to log")
-
+    
     args = parser.parse_args()
     batch_size, epochs, learning_rate, model_type = args.batch_size, args.epochs, args.lr, args.model_type
     verbosely_write(file, f'Model: {model_type}, Batch_size: {batch_size}, Epochs: {epochs}, Learning Rate: {learning_rate}')
-    log_path = args.log_path
-
+    
     transform_train = transforms.Compose([
         transforms.RandomCrop(32, padding=4),
         transforms.RandomHorizontalFlip(),
@@ -195,7 +193,7 @@ def main(file: TextIO):
 
 if __name__ == '__main__':
     now = datetime.datetime.now()
-    log_path = './test'
+    log_path = './log2'
     if not os.path.exists(log_path):
         os.makedirs(log_path)
     log_file = open(f'{log_path}/{now.strftime("%y%m%d-%H%M%S")}.log', 'w', encoding='utf-8')
