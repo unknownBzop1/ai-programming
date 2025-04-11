@@ -34,7 +34,7 @@ class SimpleCNN(nn.Module):
 
 class SimpleCNN2(nn.Module):
     def __init__(self, class_count: int):
-        super(SimpleCNN, self).__init__()
+        super(SimpleCNN2, self).__init__()
         self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
         self.conv2 = nn.Conv2d(16, 64, kernel_size=3, padding=1)
         self.pool = nn.MaxPool2d(2, 2)

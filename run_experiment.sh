@@ -10,5 +10,8 @@ do
         do
             python3 cifar_training.py --model_type $model --batch_size $batch --epochs 40 --lr $lr --log_path ./log2
         done
+        git add .
+        git commit -m date +"%y%m%d-%H%M updates"
+        git push origin main
     done
 done
