@@ -120,9 +120,9 @@ def evaluate_model(model, test_loader):
     return 100 * correct / total
 
 
-def verbosely_write(file: TextIO, text: str):
-    file.writelines(text)
-    print(text)
+def verbosely_write(file: TextIO, text: str, end='\n'):
+    file.write(text + end)
+    print(text, end=end)
 
 
 def main(file: TextIO):

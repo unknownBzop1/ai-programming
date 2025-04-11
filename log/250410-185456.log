@@ -1,0 +1,7 @@
+Model: cnn, Batch_size: 64, Epochs: 5, Learning Rate: 0.1
+Current device is cuda.
+Epoch [1/5], Loss: 19.8767, Accuracy: 10.00%
+Epoch [2/5], Loss: 33.2792, Accuracy: 10.00%
+Epoch [3/5], Loss: 2.3110, Accuracy: 10.00%
+Epoch [4/5], Loss: 3.9917, Accuracy: 10.00%
+Epoch [5/5], Loss: 2.3115, Accuracy: 10.00%
