@@ -1,5 +1,6 @@
 import datetime
 from typing import TextIO
+import os
 
 import torch
 import torch.nn as nn
@@ -25,6 +26,24 @@ class SimpleCNN(nn.Module):
     def forward(self, x):
         x = self.pool(F.relu(self.conv1(x)))  # (B, 3, 32, 32) -> (B, 32, 32, 32) -> (B, 32, 16, 16)
         x = self.pool(F.relu(self.conv2(x)))  # (B, 32, 16, 16) -> (B, 64, 16, 16) -> (B, 64, 8, 8)
+        x = x.view(x.size(0), -1) # (B, 64, 8, 8) -> (B, 64 * 8 * 8)
+        x = F.relu(self.fc1(x))
+        x = self.fc2(x)
+        return x
+
+
+class SimpleCNN2(nn.Module):
+    def __init__(self, class_count: int):
+        super(SimpleCNN, self).__init__()
+        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
+        self.conv2 = nn.Conv2d(16, 64, kernel_size=3, padding=1)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.fc1 = nn.Linear(64*8*8, 128)
+        self.fc2 = nn.Linear(128, class_count)
+
+    def forward(self, x):
+        x = self.pool(F.relu(self.conv1(x)))  # (B, 3, 32, 32) -> (B, 16, 32, 32) -> (B, 16, 16, 16)
+        x = self.pool(F.relu(self.conv2(x)))  # (B, 16, 16, 16) -> (B, 64, 16, 16) -> (B, 64, 8, 8)
         x = x.view(x.size(0), -1) # (B, 64, 8, 8) -> (B, 64 * 8 * 8)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
@@ -63,6 +82,10 @@ def cnn_model(class_count: int) -> nn.Module:
     return SimpleCNN(class_count)
 
 
+def cnn2_model(class_count: int) -> nn.Module:
+    return SimpleCNN2(class_count)
+
+
 def fcnn_model(class_count: int) -> nn.Module:
     return SimpleFCNN(class_count)
 
@@ -84,6 +107,7 @@ def googlenet_model(class_count: int) -> nn.Module:
 def build_model(model_type: str, class_count=10) -> nn.Module:
     models_dict: dict = {
         'cnn': cnn_model,
+        'cnn2': cnn2_model,
         'fcnn': fcnn_model,
         'resnet18': resnet18_model,
         'googlenet': googlenet_model}
@@ -168,7 +192,12 @@ def main(file: TextIO):
 
 
 if __name__ == '__main__':
+    parser.add_argument("--log_path", type=str, default="./log", help="path to log")
+    log_path = parser.parse_args().log_path
+    if not os.path.exists(log_path):
+        os.makedirs(log_path)
+    
     now = datetime.datetime.now()
-    log_file = open(f'./log/{now.strftime("%y%m%d-%H%M%S")}.log', 'w', encoding='utf-8')
+    log_file = open(f'{log_path}/{now.strftime("%y%m%d-%H%M%S")}.log', 'w', encoding='utf-8')
     main(log_file)
     log_file.close()
