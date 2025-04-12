@@ -1,0 +1,22 @@
+Model: fcnn, Batch_size: 64, Epochs: 20, Learning Rate: 0.003
+Current device is cuda.
+Epoch [1/20], Loss: 2.1077, Accuracy: 23.03%
+Epoch [2/20], Loss: 2.0883, Accuracy: 21.19%
+Epoch [3/20], Loss: 2.0937, Accuracy: 21.19%
+Epoch [4/20], Loss: 2.0695, Accuracy: 21.94%
+Epoch [5/20], Loss: 2.0922, Accuracy: 23.03%
+Epoch [6/20], Loss: 1.9893, Accuracy: 27.50%
+Epoch [7/20], Loss: 1.9436, Accuracy: 29.06%
+Epoch [8/20], Loss: 1.9018, Accuracy: 31.67%
+Epoch [9/20], Loss: 1.8616, Accuracy: 36.22%
+Epoch [10/20], Loss: 1.8041, Accuracy: 38.11%
+Epoch [11/20], Loss: 1.7448, Accuracy: 39.65%
+Epoch [12/20], Loss: 1.7220, Accuracy: 40.84%
+Epoch [13/20], Loss: 1.7080, Accuracy: 40.84%
+Epoch [14/20], Loss: 1.6982, Accuracy: 41.29%
+Epoch [15/20], Loss: 1.6823, Accuracy: 41.75%
+Epoch [16/20], Loss: 1.6733, Accuracy: 41.78%
+Epoch [17/20], Loss: 1.6726, Accuracy: 41.87%
+Epoch [18/20], Loss: 1.6688, Accuracy: 41.87%
+Epoch [19/20], Loss: 1.6696, Accuracy: 41.90%
+Epoch [20/20], Loss: 1.6707, Accuracy: 41.98%
