@@ -14,96 +14,6 @@ import argparse
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-class SimpleCNN(nn.Module):
-    def __init__(self, class_count: int):
-        super(SimpleCNN, self).__init__()
-        self.conv1 = nn.Conv2d(3, 32, kernel_size=3, padding=1)
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.fc1 = nn.Linear(64*8*8, 128)
-        self.fc2 = nn.Linear(128, class_count)
-
-    def forward(self, x):
-        x = self.pool(F.relu(self.conv1(x)))  # (B, 3, 32, 32) -> (B, 32, 32, 32) -> (B, 32, 16, 16)
-        x = self.pool(F.relu(self.conv2(x)))  # (B, 32, 16, 16) -> (B, 64, 16, 16) -> (B, 64, 8, 8)
-        x = x.view(x.size(0), -1) # (B, 64, 8, 8) -> (B, 64 * 8 * 8)
-        x = F.relu(self.fc1(x))
-        x = self.fc2(x)
-        return x
-
-
-class SimpleCNN2(nn.Module):
-    def __init__(self, class_count: int):
-        super(SimpleCNN2, self).__init__()
-        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
-        self.conv2 = nn.Conv2d(16, 64, kernel_size=3, padding=1)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.fc1 = nn.Linear(64*8*8, 128)
-        self.fc2 = nn.Linear(128, class_count)
-
-    def forward(self, x):
-        x = self.pool(F.relu(self.conv1(x)))  # (B, 3, 32, 32) -> (B, 16, 32, 32) -> (B, 16, 16, 16)
-        x = self.pool(F.relu(self.conv2(x)))  # (B, 16, 16, 16) -> (B, 64, 16, 16) -> (B, 64, 8, 8)
-        x = x.view(x.size(0), -1) # (B, 64, 8, 8) -> (B, 64 * 8 * 8)
-        x = F.relu(self.fc1(x))
-        x = self.fc2(x)
-        return x
-
-
-class SimpleFCNN(nn.Module):
-    def __init__(self, class_count: int):
-        """
-        :param class_count: number of classes to classify
-        """
-        super(SimpleFCNN, self).__init__()
-        self.flatten = nn.Flatten()
-        self.fc1 = nn.Linear(32 * 32 * 3, 2048)
-        self.fc2 = nn.Linear(2048, 1024)
-        self.fc3 = nn.Linear(1024, 512)
-        self.fc4 = nn.Linear(512, 256)
-        self.fc5 = nn.Linear(256, class_count)
-        self.dropout = nn.Dropout(0.2)
-
-    def forward(self, x):
-        x = self.flatten(x)
-        x = F.relu(self.fc1(x))
-        x = self.dropout(x)
-        x = F.relu(self.fc2(x))
-        x = self.dropout(x)
-        x = F.relu(self.fc3(x))
-        x = self.dropout(x)
-        x = F.relu(self.fc4(x))
-        x = self.dropout(x)
-        x = self.fc5(x)
-        return x
-
-
-def cnn_model(class_count: int) -> nn.Module:
-    return SimpleCNN(class_count)
-
-
-def cnn2_model(class_count: int) -> nn.Module:
-    return SimpleCNN2(class_count)
-
-
-def fcnn_model(class_count: int) -> nn.Module:
-    return SimpleFCNN(class_count)
-
-
-def resnet18_model(class_count: int) -> nn.Module:
-    from torchvision.models import resnet18
-    model = resnet18(pretrained=False)  # if true, fetches pretrained data from imageNet
-    model.fc = nn.Linear(model.fc.in_features, class_count)
-    return model
-
-
-def googlenet_model(class_count: int) -> nn.Module:
-    from torchvision.models import googlenet
-    model = googlenet(pretrained=False)
-    model.fc = nn.Linear(model.fc.in_features, class_count)
-    return model
-
-
 class ImprovedCNN(nn.Module):
     def __init__(self, class_count: int):
         super(ImprovedCNN, self).__init__()
@@ -170,11 +80,6 @@ def improved_cnn_model(class_count: int) -> nn.Module:
 
 def build_model(model_type: str, class_count=10) -> nn.Module:
     models_dict: dict = {
-        'cnn': cnn_model,
-        'cnn2': cnn2_model,
-        'fcnn': fcnn_model,
-        'resnet18': resnet18_model,
-        'googlenet': googlenet_model,
         'improved_cnn': improved_cnn_model}
     if model_type not in models_dict:
         raise ValueError(f'Unknown model type: {model_type}')
@@ -215,7 +120,7 @@ def verbosely_write(file: TextIO, text: str, end='\n'):
 
 
 def main(file: TextIO):
-    parser = argparse.ArgumentParser(description='Train a CNN on CIFAR-10')
+    parser = argparse.ArgumentParser(description='Train an improved CNN on CIFAR-10')
     parser.add_argument("--model_type", type=str, default="improved_cnn", help="Model type")
     parser.add_argument("--batch_size", type=int, default=128)
     parser.add_argument("--epochs", type=int, default=100, help='epoch count')
@@ -287,4 +192,4 @@ if __name__ == '__main__':
         os.makedirs(log_path)
     log_file = open(f'{log_path}/{now.strftime("%y%m%d-%H%M%S")}.log', 'w', encoding='utf-8')
     main(log_file)
-    log_file.close()
+    log_file.close() 

@@ -1,0 +1,168 @@
+CIFAR-100 ResNet Training Script Documentation
+============================================
+
+This documentation explains the training script for CIFAR-100 classification using ResNet models. It's designed to be beginner-friendly and help you understand the concepts of Convolutional Neural Networks (CNNs) and deep learning training.
+
+1. What is CIFAR-100?
+---------------------
+CIFAR-100 is a dataset containing 60,000 32x32 color images divided into 100 classes. Each class has 600 images:
+- 500 training images
+- 100 testing images
+The images are organized into 20 superclasses (e.g., "aquatic mammals", "flowers", "vehicles") and 100 fine-grained classes.
+
+2. What is ResNet?
+-----------------
+ResNet (Residual Network) is a popular CNN architecture that introduced the concept of "skip connections" or "residual connections". These connections help in training very deep networks by allowing the gradient to flow more easily through the network.
+
+Available ResNet models in this script:
+- ResNet-18: ~11M parameters (good for beginners, faster training)
+- ResNet-34: ~21M parameters (better accuracy than ResNet-18)
+- ResNet-50: ~25M parameters (good balance of accuracy and efficiency)
+- ResNet-101: ~44M parameters (higher accuracy, more resource intensive)
+- ResNet-152: ~60M parameters (highest accuracy, requires significant resources)
+
+3. Command Line Arguments
+------------------------
+The script can be run with various arguments to customize the training:
+
+--model: Choose the ResNet architecture
+    Options: resnet18, resnet34, resnet50, resnet101, resnet152
+    Default: resnet18
+    Example: --model resnet50
+
+--batch_size: Number of images processed together in each training step
+    Default: 128
+    Example: --batch_size 64
+    Note: Larger batch sizes need more GPU memory but can speed up training
+
+--epochs: Number of complete passes through the training dataset
+    Default: 100
+    Example: --epochs 150
+    Note: One epoch = one complete pass through all training images
+
+--lr: Initial learning rate
+    Default: 0.1
+    Example: --lr 0.01
+    Note: Learning rate controls how much we adjust the model weights
+
+--weight_decay: L2 regularization parameter
+    Default: 5e-4
+    Example: --weight_decay 1e-4
+    Note: Helps prevent overfitting by penalizing large weights
+
+--scheduler: Learning rate scheduling strategy
+    Options: step, cosine, plateau
+    Default: cosine
+    Example: --scheduler plateau
+    Note: 
+    - step: Reduces learning rate by factor every N epochs
+    - cosine: Smoothly decreases learning rate following cosine curve
+    - plateau: Reduces learning rate when validation loss stops improving
+
+--patience: Number of epochs to wait for improvement before early stopping
+    Default: 7
+    Example: --patience 10
+    Note: Early stopping helps prevent overfitting
+
+--pretrained: Use pretrained weights from ImageNet
+    Default: False
+    Example: --pretrained
+    Note: Using pretrained weights can significantly improve performance
+
+4. Key Functions
+---------------
+get_resnet_model(model_name, num_classes, pretrained):
+    - Creates and configures a ResNet model
+    - Modifies the first layer to work with 32x32 images
+    - Adjusts the final layer for 100 classes
+    - Returns the configured model
+
+train_model(model, train_loader, optimizer, criterion, device):
+    - Trains the model for one epoch
+    - Returns training loss and accuracy
+    - Handles the forward pass, loss calculation, and backpropagation
+
+evaluate_model(model, test_loader, criterion, device):
+    - Evaluates the model on the test set
+    - Returns test loss and accuracy
+    - Does not update model weights (evaluation mode)
+
+EarlyStopper class:
+    - Monitors validation loss
+    - Stops training if no improvement for 'patience' epochs
+    - Saves the best model
+
+5. Training Process
+------------------
+1. Data Preparation:
+   - Loads CIFAR-100 dataset
+   - Applies data augmentation (random crop, horizontal flip)
+   - Normalizes images using CIFAR-100 statistics
+
+2. Model Setup:
+   - Initializes ResNet model
+   - Moves model to GPU if available
+   - Sets up loss function (CrossEntropyLoss)
+   - Configures optimizer (SGD with momentum)
+
+3. Training Loop:
+   For each epoch:
+   - Trains on training data
+   - Evaluates on test data
+   - Updates learning rate
+   - Saves best model
+   - Checks for early stopping
+
+6. Output Files
+--------------
+- Model checkpoints: best_{model_name}_cifar100.pth
+- Training logs: logs_cifar100/YYMMDD-HHMMSS.log
+
+7. Example Commands
+------------------
+Basic training with ResNet-18:
+    python train_cifar100_resnet.py --model resnet18 --pretrained
+
+Training with custom parameters:
+    python train_cifar100_resnet.py --model resnet50 --batch_size 64 --epochs 150 --lr 0.01 --scheduler cosine --pretrained
+
+Training with early stopping:
+    python train_cifar100_resnet.py --model resnet34 --scheduler plateau --patience 10 --pretrained
+
+8. Tips for Beginners
+--------------------
+1. Start with ResNet-18 and pretrained weights
+2. Use a smaller batch size if you run into memory issues
+3. Monitor the training logs to understand the learning process
+4. If training is too slow, try reducing the number of epochs
+5. If accuracy is low, try:
+   - Using a larger model (e.g., ResNet-50)
+   - Increasing the number of epochs
+   - Adjusting the learning rate
+   - Using pretrained weights
+
+9. Common Issues and Solutions
+----------------------------
+1. Out of Memory (OOM):
+   - Reduce batch size
+   - Use a smaller model (ResNet-18)
+   - Close other applications using GPU
+
+2. Slow Training:
+   - Reduce batch size
+   - Use a smaller model
+   - Reduce number of workers in DataLoader
+
+3. Poor Accuracy:
+   - Use pretrained weights
+   - Try a larger model
+   - Adjust learning rate
+   - Increase number of epochs
+
+4. Overfitting:
+   - Use weight decay
+   - Enable early stopping
+   - Use data augmentation
+   - Try a smaller model
+
+Remember: Deep learning is an iterative process. Don't be afraid to experiment with different parameters and architectures to find what works best for your specific case. 
