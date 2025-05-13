@@ -1,5 +1,5 @@
 import datetime
-from typing import TextIO, Tuple
+from typing import TextIO
 import os
 import argparse
 import numpy as np
@@ -35,10 +35,19 @@ def get_resnet_model(model_name: str, class_count=100, pretrained=True) -> nn.Mo
         'resnet101': models.resnet101,
         'resnet152': models.resnet152
     }
+
+    weights_dict = {
+        'resnet18': models.ResNet18_Weights.DEFAULT,
+        'resnet34': models.ResNet34_Weights.DEFAULT,
+        'resnet50': models.ResNet50_Weights.DEFAULT,
+        'resnet101': models.ResNet101_Weights.DEFAULT,
+        'resnet152': models.ResNet152_Weights.DEFAULT
+    }
     
     if model_name not in model_dict:
         raise ValueError(f'Unknown model name: {model_name}. Choose from {list(model_dict.keys())}')
-    model = model_dict[model_name](pretrained=pretrained)
+    pretrained_weights = weights_dict[model_name] if pretrained else None
+    model = model_dict[model_name](weights=pretrained_weights)
     
     # Modify the first layer to accept 32x32 images (CIFAR-100 size)
     # Original ResNet expects 224x224 images
@@ -50,7 +59,7 @@ def get_resnet_model(model_name: str, class_count=100, pretrained=True) -> nn.Mo
 
 
 def train_model(model: nn.Module, train_loader: DataLoader, optimizer: optim.Optimizer,
-                criterion=nn.CrossEntropyLoss(), device=CURRENT_DEVICE) -> tuple[float, float]:
+                criterion=nn.CrossEntropyLoss(), device=CURRENT_DEVICE) -> tuple:
     """Train the model for one epoch."""
     model.train()
     running_loss = 0.0
@@ -74,7 +83,7 @@ def train_model(model: nn.Module, train_loader: DataLoader, optimizer: optim.Opt
 
 
 def evaluate_model(model: nn.Module, test_loader: DataLoader,
-                   criterion=nn.CrossEntropyLoss(), device=CURRENT_DEVICE) -> tuple[float, float]:
+                   criterion=nn.CrossEntropyLoss(), device=CURRENT_DEVICE) -> tuple:
     """Evaluate the model on the test set."""
     model.eval()
     test_loss = 0.0
@@ -178,7 +187,6 @@ def main(file: TextIO):
     model = get_resnet_model(args.model, class_count=100, pretrained=args.pretrained).to(CURRENT_DEVICE)
     
     # Loss function and optimizer
-    criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=args.weight_decay)
     
     # Learning rate scheduler
@@ -196,6 +204,7 @@ def main(file: TextIO):
     # Training loop
     best_accuracy = 0.0
     training_start_time = datetime.datetime.now()
+    epoch = 1
     for epoch in range(1, args.epochs + 1):
         train_loss, train_acc = train_model(model, train_loader, optimizer)
         test_loss, test_acc = evaluate_model(model, test_loader)
@@ -216,7 +225,7 @@ def main(file: TextIO):
         if test_acc > best_accuracy:
             best_accuracy = test_acc
             torch.save(model.state_dict(), best_model_path)
-            verbosely_write(file, f'New best accuracy: {best_accuracy:.2f}%')
+            print(f'New best accuracy: {best_accuracy:.2f}%')
         
         # Early stopping check
         early_stopper(test_loss, model, best_model_path)
@@ -226,13 +235,13 @@ def main(file: TextIO):
 
     training_duration = datetime.datetime.now() - training_start_time
     verbosely_write(file, f'Training completed. Best accuracy: {best_accuracy:.2f}%')
-    verbosely_write(file, f'Average epoch duration: {training_duration.total_seconds() / args.epochs:.2f} s')
+    verbosely_write(file, f'Average epoch duration: {training_duration.total_seconds() / epoch:.2f} s')
 
 
 if __name__ == '__main__':
     now = datetime.datetime.now()
     if not os.path.exists(LOG_PATH):
         os.makedirs(LOG_PATH)
-    log_file = open(f'{LOG_PATH}/{now.strftime('%y%m%d-%H%M%S')}.log', 'w', encoding='utf-8')
+    log_file = open(f'{LOG_PATH}/{now.strftime("%y%m%d-%H%M%S")}.log', 'w', encoding='utf-8')
     main(log_file)
     log_file.close()
