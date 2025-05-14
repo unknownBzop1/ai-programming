@@ -1,0 +1,55 @@
+Training Configuration:
+Model: resnet50
+Batch size: 32
+Epochs: 100
+Learning rate: 0.001
+Weight decay: 1e-05
+Scheduler: cosine
+Pretrained: False
+Device: cuda
+
+Epoch [1/100] Train Loss: 4.3812, Train Acc: 4.28%, Test Loss: 4.0309, Test Acc: 8.36%
+Epoch [2/100] Train Loss: 3.8891, Train Acc: 9.93%, Test Loss: 3.6569, Test Acc: 13.82%
+Epoch [3/100] Train Loss: 3.6095, Train Acc: 14.27%, Test Loss: 3.4639, Test Acc: 19.33%
+Epoch [4/100] Train Loss: 3.3933, Train Acc: 18.37%, Test Loss: 3.2422, Test Acc: 21.77%
+Epoch [5/100] Train Loss: 3.2087, Train Acc: 21.49%, Test Loss: 3.0639, Test Acc: 25.13%
+Epoch [6/100] Train Loss: 3.0481, Train Acc: 24.26%, Test Loss: 3.0102, Test Acc: 26.93%
+Epoch [7/100] Train Loss: 2.9082, Train Acc: 27.13%, Test Loss: 2.7913, Test Acc: 30.84%
+Epoch [8/100] Train Loss: 2.7554, Train Acc: 30.33%, Test Loss: 2.7107, Test Acc: 32.13%
+Epoch [9/100] Train Loss: 2.6134, Train Acc: 32.91%, Test Loss: 2.5689, Test Acc: 35.55%
+Epoch [10/100] Train Loss: 2.4780, Train Acc: 35.73%, Test Loss: 2.4041, Test Acc: 38.29%
+Epoch [11/100] Train Loss: 2.3369, Train Acc: 38.49%, Test Loss: 2.3270, Test Acc: 40.27%
+Epoch [12/100] Train Loss: 2.2229, Train Acc: 40.68%, Test Loss: 2.2887, Test Acc: 40.93%
+Epoch [13/100] Train Loss: 2.1074, Train Acc: 43.35%, Test Loss: 2.1628, Test Acc: 44.07%
+Epoch [14/100] Train Loss: 2.0057, Train Acc: 45.79%, Test Loss: 2.1265, Test Acc: 44.86%
+Epoch [15/100] Train Loss: 1.9101, Train Acc: 47.88%, Test Loss: 2.0212, Test Acc: 46.99%
+Epoch [16/100] Train Loss: 1.8199, Train Acc: 49.85%, Test Loss: 2.0940, Test Acc: 47.71%
+Epoch [17/100] Train Loss: 1.7390, Train Acc: 51.74%, Test Loss: 1.9396, Test Acc: 49.04%
+Epoch [18/100] Train Loss: 1.6527, Train Acc: 53.91%, Test Loss: 1.8787, Test Acc: 50.74%
+Epoch [19/100] Train Loss: 1.5831, Train Acc: 55.74%, Test Loss: 1.8199, Test Acc: 52.50%
+Epoch [20/100] Train Loss: 1.5142, Train Acc: 57.28%, Test Loss: 1.7689, Test Acc: 53.57%
+Epoch [21/100] Train Loss: 1.4423, Train Acc: 58.98%, Test Loss: 1.7743, Test Acc: 53.65%
+Epoch [22/100] Train Loss: 1.3849, Train Acc: 60.41%, Test Loss: 1.7202, Test Acc: 55.31%
+Epoch [23/100] Train Loss: 1.3217, Train Acc: 61.99%, Test Loss: 1.6774, Test Acc: 56.00%
+Epoch [24/100] Train Loss: 1.2657, Train Acc: 63.47%, Test Loss: 1.6938, Test Acc: 56.79%
+Epoch [25/100] Train Loss: 1.2098, Train Acc: 64.71%, Test Loss: 1.6709, Test Acc: 56.94%
+Epoch [26/100] Train Loss: 1.1632, Train Acc: 66.03%, Test Loss: 1.6644, Test Acc: 56.82%
+Epoch [27/100] Train Loss: 1.1171, Train Acc: 66.95%, Test Loss: 1.6647, Test Acc: 57.62%
+Epoch [28/100] Train Loss: 1.0650, Train Acc: 68.67%, Test Loss: 1.6480, Test Acc: 57.78%
+Epoch [29/100] Train Loss: 1.0124, Train Acc: 69.91%, Test Loss: 1.6236, Test Acc: 58.89%
+Epoch [30/100] Train Loss: 0.9747, Train Acc: 70.79%, Test Loss: 1.6310, Test Acc: 59.43%
+Epoch [31/100] Train Loss: 0.9327, Train Acc: 72.05%, Test Loss: 1.6351, Test Acc: 59.28%
+Epoch [32/100] Train Loss: 0.8862, Train Acc: 73.12%, Test Loss: 1.6248, Test Acc: 59.96%
+Epoch [33/100] Train Loss: 0.8492, Train Acc: 74.18%, Test Loss: 1.6104, Test Acc: 60.13%
+Epoch [34/100] Train Loss: 0.8133, Train Acc: 75.43%, Test Loss: 1.6037, Test Acc: 60.57%
+Epoch [35/100] Train Loss: 0.7707, Train Acc: 76.56%, Test Loss: 1.5978, Test Acc: 60.81%
+Epoch [36/100] Train Loss: 0.7345, Train Acc: 77.46%, Test Loss: 1.6144, Test Acc: 61.42%
+Epoch [37/100] Train Loss: 0.6976, Train Acc: 78.60%, Test Loss: 1.6141, Test Acc: 60.98%
+Epoch [38/100] Train Loss: 0.6661, Train Acc: 79.34%, Test Loss: 1.6073, Test Acc: 61.41%
+Epoch [39/100] Train Loss: 0.6315, Train Acc: 80.67%, Test Loss: 1.6072, Test Acc: 61.67%
+Epoch [40/100] Train Loss: 0.6003, Train Acc: 81.54%, Test Loss: 1.6465, Test Acc: 61.56%
+Epoch [41/100] Train Loss: 0.5671, Train Acc: 82.47%, Test Loss: 1.6650, Test Acc: 61.89%
+Epoch [42/100] Train Loss: 0.5399, Train Acc: 83.23%, Test Loss: 1.6457, Test Acc: 62.04%
+Early stopping triggered
+Training completed. Best accuracy: 62.04%
+Average epoch duration: 67.83 s

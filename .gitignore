@@ -23,6 +23,7 @@ var/
 .installed.cfg
 *.egg
 *.zip
+saved_models/
 
 data/
 image/

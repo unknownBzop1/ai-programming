@@ -3,9 +3,9 @@
 cd /home/work/unknownbzop1/ai-programming || return
 cp .gitconfig ../..
 
-for wd in 1e-5 3e-5 1e-4 3e-4 1e-3
+for wd in 3e-5
 do
-    for batch in 256 128 64 32
+    for batch in 32
     do
         for lr in 0.1 0.03 0.01 0.003 0.001
         do
