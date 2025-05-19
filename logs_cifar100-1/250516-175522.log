@@ -1,0 +1,50 @@
+Training Configuration:
+Model: resnet50
+Batch size: 16
+Epochs: 100
+Learning rate: 0.02
+Weight decay: 0.0001
+Scheduler: cosine
+Pretrained: False
+Device: cuda
+
+Epoch [1/100] Train Loss: 4.3297, Train Acc: 5.02%, Test Loss: 3.8458, Test Acc: 10.31%
+Epoch [2/100] Train Loss: 3.6507, Train Acc: 13.33%, Test Loss: 3.3055, Test Acc: 20.52%
+Epoch [3/100] Train Loss: 3.2106, Train Acc: 21.14%, Test Loss: 3.2017, Test Acc: 26.99%
+Epoch [4/100] Train Loss: 2.8303, Train Acc: 28.53%, Test Loss: 2.6726, Test Acc: 33.63%
+Epoch [5/100] Train Loss: 2.4971, Train Acc: 35.28%, Test Loss: 2.2922, Test Acc: 39.68%
+Epoch [6/100] Train Loss: 2.2192, Train Acc: 41.04%, Test Loss: 2.0638, Test Acc: 45.26%
+Epoch [7/100] Train Loss: 2.0017, Train Acc: 45.85%, Test Loss: 1.8847, Test Acc: 49.84%
+Epoch [8/100] Train Loss: 1.8178, Train Acc: 50.25%, Test Loss: 1.8374, Test Acc: 50.98%
+Epoch [9/100] Train Loss: 1.6686, Train Acc: 53.38%, Test Loss: 1.6955, Test Acc: 53.94%
+Epoch [10/100] Train Loss: 1.5422, Train Acc: 56.82%, Test Loss: 1.6094, Test Acc: 56.37%
+Epoch [11/100] Train Loss: 1.4473, Train Acc: 58.97%, Test Loss: 1.5099, Test Acc: 58.38%
+Epoch [12/100] Train Loss: 1.3571, Train Acc: 61.23%, Test Loss: 1.4336, Test Acc: 60.39%
+Epoch [13/100] Train Loss: 1.2845, Train Acc: 63.07%, Test Loss: 1.3779, Test Acc: 62.22%
+Epoch [14/100] Train Loss: 1.2216, Train Acc: 64.61%, Test Loss: 1.3785, Test Acc: 61.50%
+Epoch [15/100] Train Loss: 1.1470, Train Acc: 66.60%, Test Loss: 1.3675, Test Acc: 62.29%
+Epoch [16/100] Train Loss: 1.1027, Train Acc: 67.57%, Test Loss: 1.3277, Test Acc: 63.43%
+Epoch [17/100] Train Loss: 1.0540, Train Acc: 69.01%, Test Loss: 1.3459, Test Acc: 63.62%
+Epoch [18/100] Train Loss: 1.0138, Train Acc: 69.91%, Test Loss: 1.3096, Test Acc: 64.47%
+Epoch [19/100] Train Loss: 0.9746, Train Acc: 71.08%, Test Loss: 1.2738, Test Acc: 65.28%
+Epoch [20/100] Train Loss: 0.9307, Train Acc: 72.14%, Test Loss: 1.2593, Test Acc: 65.92%
+Epoch [21/100] Train Loss: 0.8943, Train Acc: 73.29%, Test Loss: 1.2591, Test Acc: 65.92%
+Epoch [22/100] Train Loss: 0.8604, Train Acc: 74.07%, Test Loss: 1.2650, Test Acc: 66.27%
+Epoch [23/100] Train Loss: 0.8287, Train Acc: 74.99%, Test Loss: 1.2491, Test Acc: 66.61%
+Epoch [24/100] Train Loss: 0.8005, Train Acc: 75.72%, Test Loss: 1.2535, Test Acc: 67.15%
+Epoch [25/100] Train Loss: 0.7740, Train Acc: 76.55%, Test Loss: 1.3369, Test Acc: 65.62%
+Epoch [26/100] Train Loss: 0.7528, Train Acc: 76.93%, Test Loss: 1.2740, Test Acc: 67.00%
+Epoch [27/100] Train Loss: 0.7191, Train Acc: 78.00%, Test Loss: 1.2199, Test Acc: 67.71%
+Epoch [28/100] Train Loss: 0.7028, Train Acc: 78.28%, Test Loss: 1.2814, Test Acc: 67.30%
+Epoch [29/100] Train Loss: 0.6753, Train Acc: 79.17%, Test Loss: 1.2385, Test Acc: 67.37%
+Epoch [30/100] Train Loss: 0.6473, Train Acc: 80.15%, Test Loss: 1.2079, Test Acc: 68.94%
+Epoch [31/100] Train Loss: 0.6315, Train Acc: 80.33%, Test Loss: 1.2280, Test Acc: 68.69%
+Epoch [32/100] Train Loss: 0.6095, Train Acc: 80.98%, Test Loss: 1.3075, Test Acc: 67.57%
+Epoch [33/100] Train Loss: 0.5921, Train Acc: 81.78%, Test Loss: 1.2615, Test Acc: 68.67%
+Epoch [34/100] Train Loss: 0.5620, Train Acc: 82.48%, Test Loss: 1.2904, Test Acc: 67.84%
+Epoch [35/100] Train Loss: 0.5502, Train Acc: 82.81%, Test Loss: 1.2226, Test Acc: 70.03%
+Epoch [36/100] Train Loss: 0.5344, Train Acc: 83.32%, Test Loss: 1.2812, Test Acc: 68.41%
+Epoch [37/100] Train Loss: 0.5090, Train Acc: 83.95%, Test Loss: 1.2896, Test Acc: 68.84%
+Early stopping triggered
+Training completed. Best accuracy: 70.03%
+Average epoch duration: 113.56 s

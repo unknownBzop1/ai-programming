@@ -1,0 +1,55 @@
+Training Configuration:
+Model: resnet50
+Batch size: 64
+Epochs: 100
+Learning rate: 0.001
+Weight decay: 0.0001
+Scheduler: cosine
+Pretrained: False
+Device: cuda
+
+Epoch [1/100] Train Loss: 4.4380, Train Acc: 3.37%, Test Loss: 4.2144, Test Acc: 5.49%
+Epoch [2/100] Train Loss: 4.0470, Train Acc: 7.71%, Test Loss: 3.8642, Test Acc: 11.08%
+Epoch [3/100] Train Loss: 3.8018, Train Acc: 11.17%, Test Loss: 3.6502, Test Acc: 14.70%
+Epoch [4/100] Train Loss: 3.6104, Train Acc: 14.51%, Test Loss: 3.5005, Test Acc: 17.03%
+Epoch [5/100] Train Loss: 3.4463, Train Acc: 17.27%, Test Loss: 3.3323, Test Acc: 19.80%
+Epoch [6/100] Train Loss: 3.3074, Train Acc: 19.78%, Test Loss: 3.2243, Test Acc: 21.88%
+Epoch [7/100] Train Loss: 3.1820, Train Acc: 21.98%, Test Loss: 3.0922, Test Acc: 24.60%
+Epoch [8/100] Train Loss: 3.0613, Train Acc: 24.24%, Test Loss: 2.9795, Test Acc: 26.43%
+Epoch [9/100] Train Loss: 2.9450, Train Acc: 26.45%, Test Loss: 2.8713, Test Acc: 28.47%
+Epoch [10/100] Train Loss: 2.8460, Train Acc: 28.24%, Test Loss: 2.8141, Test Acc: 29.97%
+Epoch [11/100] Train Loss: 2.7593, Train Acc: 29.95%, Test Loss: 2.7412, Test Acc: 30.57%
+Epoch [12/100] Train Loss: 2.6642, Train Acc: 32.10%, Test Loss: 2.6572, Test Acc: 32.97%
+Epoch [13/100] Train Loss: 2.5720, Train Acc: 33.81%, Test Loss: 2.5744, Test Acc: 34.55%
+Epoch [14/100] Train Loss: 2.4834, Train Acc: 35.58%, Test Loss: 2.5113, Test Acc: 36.18%
+Epoch [15/100] Train Loss: 2.3996, Train Acc: 37.38%, Test Loss: 2.4713, Test Acc: 37.16%
+Epoch [16/100] Train Loss: 2.3121, Train Acc: 39.35%, Test Loss: 2.4774, Test Acc: 37.19%
+Epoch [17/100] Train Loss: 2.2336, Train Acc: 40.43%, Test Loss: 2.3461, Test Acc: 38.98%
+Epoch [18/100] Train Loss: 2.1502, Train Acc: 42.43%, Test Loss: 2.2721, Test Acc: 41.26%
+Epoch [19/100] Train Loss: 2.0750, Train Acc: 44.42%, Test Loss: 2.2420, Test Acc: 42.38%
+Epoch [20/100] Train Loss: 2.0088, Train Acc: 45.84%, Test Loss: 2.2194, Test Acc: 42.83%
+Epoch [21/100] Train Loss: 1.9371, Train Acc: 47.51%, Test Loss: 2.1341, Test Acc: 44.47%
+Epoch [22/100] Train Loss: 1.8806, Train Acc: 48.59%, Test Loss: 2.1189, Test Acc: 45.37%
+Epoch [23/100] Train Loss: 1.8106, Train Acc: 50.35%, Test Loss: 2.0666, Test Acc: 45.48%
+Epoch [24/100] Train Loss: 1.7570, Train Acc: 51.57%, Test Loss: 2.0757, Test Acc: 46.24%
+Epoch [25/100] Train Loss: 1.6953, Train Acc: 52.89%, Test Loss: 2.0143, Test Acc: 47.63%
+Epoch [26/100] Train Loss: 1.6447, Train Acc: 54.16%, Test Loss: 1.9833, Test Acc: 48.46%
+Epoch [27/100] Train Loss: 1.5885, Train Acc: 55.50%, Test Loss: 1.9665, Test Acc: 49.16%
+Epoch [28/100] Train Loss: 1.5361, Train Acc: 57.01%, Test Loss: 1.9378, Test Acc: 49.77%
+Epoch [29/100] Train Loss: 1.4896, Train Acc: 57.92%, Test Loss: 1.9341, Test Acc: 49.98%
+Epoch [30/100] Train Loss: 1.4445, Train Acc: 58.92%, Test Loss: 1.8901, Test Acc: 50.72%
+Epoch [31/100] Train Loss: 1.3984, Train Acc: 60.06%, Test Loss: 1.8927, Test Acc: 51.49%
+Epoch [32/100] Train Loss: 1.3534, Train Acc: 61.37%, Test Loss: 1.8879, Test Acc: 52.09%
+Epoch [33/100] Train Loss: 1.3086, Train Acc: 62.27%, Test Loss: 1.8893, Test Acc: 52.28%
+Epoch [34/100] Train Loss: 1.2739, Train Acc: 63.22%, Test Loss: 1.8743, Test Acc: 52.30%
+Epoch [35/100] Train Loss: 1.2325, Train Acc: 64.31%, Test Loss: 1.8256, Test Acc: 52.99%
+Epoch [36/100] Train Loss: 1.1883, Train Acc: 65.68%, Test Loss: 1.8284, Test Acc: 53.82%
+Epoch [37/100] Train Loss: 1.1503, Train Acc: 66.59%, Test Loss: 1.8340, Test Acc: 53.71%
+Epoch [38/100] Train Loss: 1.1115, Train Acc: 67.73%, Test Loss: 1.8312, Test Acc: 54.56%
+Epoch [39/100] Train Loss: 1.0782, Train Acc: 68.61%, Test Loss: 1.8323, Test Acc: 54.74%
+Epoch [40/100] Train Loss: 1.0387, Train Acc: 69.63%, Test Loss: 1.8401, Test Acc: 54.78%
+Epoch [41/100] Train Loss: 1.0072, Train Acc: 70.40%, Test Loss: 1.8353, Test Acc: 54.58%
+Epoch [42/100] Train Loss: 0.9732, Train Acc: 71.35%, Test Loss: 1.8404, Test Acc: 54.85%
+Early stopping triggered
+Training completed. Best accuracy: 54.85%
+Average epoch duration: 33.32 s

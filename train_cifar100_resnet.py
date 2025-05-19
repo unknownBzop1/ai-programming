@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import StepLR, CosineAnnealingLR, ReduceLROnPlateau
 
 CURRENT_DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-LOG_PATH = './logs_cifar100'
+LOG_PATH = './logs_cifar100-1'
 MODEL_PATH = './saved_models'
 
 
@@ -180,8 +180,8 @@ def main(file: TextIO):
     # Load datasets
     train_dataset = datasets.CIFAR100(root='./data', train=True, download=True, transform=transform_train)
     test_dataset = datasets.CIFAR100(root='./data', train=False, download=True, transform=transform_test)
-    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4, pin_memory=True)
-    test_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
+    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=3, pin_memory=True)
+    test_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=3, pin_memory=True)
     
     # Initialize model
     model = get_resnet_model(args.model, class_count=100, pretrained=args.pretrained).to(CURRENT_DEVICE)
@@ -242,6 +242,7 @@ if __name__ == '__main__':
     now = datetime.datetime.now()
     if not os.path.exists(LOG_PATH):
         os.makedirs(LOG_PATH)
+    print(now.strftime("%y%m%d-%H%M%S"))
     log_file = open(f'{LOG_PATH}/{now.strftime("%y%m%d-%H%M%S")}.log', 'w', encoding='utf-8')
     main(log_file)
     log_file.close()
